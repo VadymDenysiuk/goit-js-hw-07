@@ -28,8 +28,14 @@ document.querySelector('style').insertAdjacentHTML('beforeEnd',
   border-radius: 3px;
 }`
 )
-images.forEach(image => {
-  const galleryEl = document.querySelector('#gallery');
-  galleryEl.insertAdjacentHTML('beforeend', `<li class='item'><img class='image' src='${image.url}' alt='${image.alt}'></img></li>`)
-})
 
+const galleryEl = document.querySelector('#gallery');
+const elements = images.map(image => {
+const itemEl = document.createElement("li");
+itemEl.classList.add("item");
+  itemEl.insertAdjacentHTML("afterbegin",
+   `<img class = "image" src = ${image.url} alt = ${image.alt}>`
+  );
+  return itemEl;
+})
+galleryEl.append(...elements)
