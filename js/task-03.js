@@ -12,12 +12,10 @@ const images = [
     alt: "Group of Horses Running",
   },
 ];
-
 document.querySelector('style').insertAdjacentHTML('beforeEnd', 
 `#gallery {
   list-style: none;
 }
-
 .item:not(:last-child) {
   margin-bottom: 15px;
 }
@@ -28,14 +26,7 @@ document.querySelector('style').insertAdjacentHTML('beforeEnd',
   border-radius: 3px;
 }`
 )
-
 const galleryEl = document.querySelector('#gallery');
-const elements = images.map(image => {
-const itemEl = document.createElement("li");
-itemEl.classList.add("item");
-  itemEl.insertAdjacentHTML("afterbegin",
-   `<img class = "image" src = ${image.url} alt = ${image.alt}>`
-  );
-  return itemEl;
-})
-galleryEl.append(...elements)
+const createString = images => `<li class = "item"><img class = "image" src = ${images.url} alt = ${images.alt}></li>` ;
+const result = images.reduce((acc, image) => acc + createString(image), '')
+galleryEl.insertAdjacentHTML('beforeEnd', result)
